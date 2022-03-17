@@ -1,0 +1,3 @@
+export enum INJECTABLE_PROVIDER {
+  MQTT_SERVICE = 'MQTT_SERVICE',
+}

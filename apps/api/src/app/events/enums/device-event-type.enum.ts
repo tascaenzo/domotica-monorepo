@@ -1,0 +1,3 @@
+export enum EVENT_TYPE {
+  ENERGY_MONITOR = 'ENERGY_MONITOR',
+}

@@ -1,0 +1,4 @@
+export enum DEVICE_TYPE {
+  ENERGY_MONITOR = 'ENERGY_MONITOR',
+  SWITCH = 'SWITCH',
+}

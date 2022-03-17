@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@domotica/env": ["libs/environment/src/index.ts"],
+      "@domotica/shared/enums": ["libs/shared/enums/src/index.ts"],
+      "@domotica/shared/interfaces": ["libs/shared/interfaces/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

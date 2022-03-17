@@ -1,6 +1,10 @@
 {
   "version": 2,
   "projects": {
-    "api": "apps/api"
+    "api": "apps/api",
+    "enums": "libs/shared/enums",
+    "environment": "libs/environment",
+    "mobile-app": "apps/mobile-app",
+    "shared-interfaces": "libs/shared/interfaces"
   }
 }

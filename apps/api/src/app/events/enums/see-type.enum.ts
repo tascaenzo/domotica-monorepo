@@ -1,0 +1,3 @@
+export enum SEE_TYPE {
+  UPDATE_DEVICE_STATE = 'UPDATE_DEVICE_STATE',
+}

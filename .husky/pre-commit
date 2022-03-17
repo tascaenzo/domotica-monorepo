@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+STAGED_FILES="$(git diff --cached --name-only --diff-filter=ACM | grep ".\(ts\|js\|html\|scss\|css\)\{0,1\}$" || true)"
+
+npx nx affected:lint --base=main --parallel --maxParallel=5
+npx nx affected:test --base=main --parallel --maxParallel=5
+
+printf '%s\n' "$STAGED_FILES" | while IFS= read -r FILE; do
+  if [ "$FILE" != "" ]; then
+    git add "$FILE"
+  fi
+done
