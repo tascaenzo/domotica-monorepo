@@ -20,7 +20,7 @@ const AppBar = ({ drawerOpen, onPressDrawer }: Props) => {
       </View>
   
       <View style={{ flexDirection: "row", padding: 8 }}>
-        <Image style={styles.avatarImg} source={require('../../../../assets/avatar.jpeg')} />
+        <Image style={styles.avatarImg} source={require('../../../assets/avatar.jpeg')} />
       </View>
     </View>
   )

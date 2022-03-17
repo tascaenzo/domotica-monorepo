@@ -3,7 +3,8 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useStyles } from "./style";
 
 interface Props {
-  style?: JSON,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  style?: any,
   icon: JSX.Element,
   title: string,
   label: string,
