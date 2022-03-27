@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import IotCard from '../../components/IotCard/IotCard';
 import { useLinkTo } from '@react-navigation/native';
 import { RoutesEnum } from '../../components/Routes/routes.enum';
+import { DeviceContext } from '../../context/device.context';
 
 const Home = (): JSX.Element => {
   const linkTo = useLinkTo();
@@ -42,13 +43,22 @@ const Home = (): JSX.Element => {
       </ScrollView>
 
       <Text style={styles.label}>Preferiti</Text>
-      <IotCard
-        onAction={() => null}
-        onOpen={() => null}
-        title="Energy monitor"
-        body={<Text>Ciao</Text>}
-        icon={<Ionicons name="people" size={32} color="#FFF" />}
-      />
+      <DeviceContext.Consumer>
+        {(value) => (
+          <IotCard
+            onAction={() => null}
+            onOpen={() => null}
+            title="Energy monitor"
+            body={
+              <Text>
+                {value?.getDevice('621ea83825d92ef1fc474da8')?.deviceId}
+              </Text>
+            }
+            icon={<Ionicons name="people" size={32} color="#FFF" />}
+          />
+        )}
+      </DeviceContext.Consumer>
+
       <IotCard
         onAction={() => null}
         onOpen={() => null}

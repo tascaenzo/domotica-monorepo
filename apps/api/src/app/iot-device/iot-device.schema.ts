@@ -1,14 +1,12 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-
-import { IotDeviceInterface } from '@domotica/shared/interfaces';
 import { DEVICE_TYPE } from '@domotica/shared/enums';
 
 export type IotDeviceDocument = IotDevice & Document;
 
 @Schema({ timestamps: true, versionKey: false, toJSON: { getters: true } })
-export class IotDevice implements IotDeviceInterface {
+export class IotDevice {
   id: string;
 
   @Prop({ default: null })

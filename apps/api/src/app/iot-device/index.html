@@ -1,6 +1,12 @@
 <script type="text/javascript">
   const eventSource = new EventSource('http://localhost:3000/api/iot-devices/sse');
-  eventSource.onmessage = ({ data }) => {
-    console.log(JSON.parse(data))
+  try {
+      eventSource.onmessage = ({ data }) => {
+    console.log(data)
   };
+  } catch (error) {
+    console.log(error)
+
+  }
+
 </script>

@@ -1,6 +1,6 @@
 import { DEVICE_TYPE } from '@domotica/shared/enums';
 
-export interface IotDeviceInterface<T = unknown> {
+export interface IotDeviceResponseInterface<T = unknown> {
   id: string;
   chipId: string;
   macAddress: string;

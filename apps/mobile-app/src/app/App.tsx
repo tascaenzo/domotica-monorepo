@@ -1,6 +1,8 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
 import Routes from './components/Routes';
+import { DeviceContext, UseDeviceListener } from './context/device.context';
+import SignIn from './screens/SignIn/SignIn';
 
 export default () => {
   const [loaded] = useFonts({
@@ -9,9 +11,17 @@ export default () => {
     OxygenBold: require('../../assets/fonts/Oxygen-Bold.ttf'),
   });
 
+  const initialState = UseDeviceListener();
+
   if (!loaded) {
     return null;
   }
 
-  return (<Routes />);
+  return <SignIn />
+
+  return (
+    <DeviceContext.Provider value={initialState}>
+      <Routes />
+    </DeviceContext.Provider>
+  );
 };
