@@ -15,7 +15,14 @@ async function bootstrap() {
   const port = config.get('API_PORT');
   // const allowedCors = config.get('CORS_ORIGINS').split(',');
 
-  app.enableCors({ origin: '*'});
+  app.enableCors({
+    //origin: ['http://localhost:8080', 'http://192.168.1.70:8080'],
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    credentials: false,
+  });
+
   app.setGlobalPrefix(globalPrefix);
 
   // Security middleware
@@ -29,7 +36,7 @@ async function bootstrap() {
   );
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   Logger.log(`� Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
 

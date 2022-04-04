@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import IotCard from '../../components/IotCard/IotCard';
 import { useLinkTo } from '@react-navigation/native';
 import { RoutesEnum } from '../../components/Routes/routes.enum';
-import { DeviceContext } from '../../context/device.context';
+import { DeviceContext } from '../../hooks/use-device-context';
 
 const Home = (): JSX.Element => {
   const linkTo = useLinkTo();

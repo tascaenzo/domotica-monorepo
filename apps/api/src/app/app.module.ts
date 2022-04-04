@@ -7,9 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { LoggerModule } from './logger/logger.module';
 import { IotDevicesModule } from './iot-device/iot-devices.module';
-
-import { API_ENV } from '@domotica/env';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { API_ENV } from '@domotica/env';
 
 @Module({
   imports: [

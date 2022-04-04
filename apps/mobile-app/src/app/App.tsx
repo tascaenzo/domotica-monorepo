@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
 import Routes from './components/Routes';
-import { DeviceContext, UseDeviceListener } from './context/device.context';
+import { DeviceContext, UseDeviceListener } from './hooks/use-device-context';
 import SignIn from './screens/SignIn/SignIn';
 
 export default () => {
@@ -17,7 +17,7 @@ export default () => {
     return null;
   }
 
-  return <SignIn />
+  return <SignIn />;
 
   return (
     <DeviceContext.Provider value={initialState}>

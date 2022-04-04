@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-interface Props { color: string | undefined, width: number | undefined }
+interface Props { color: string | undefined, width: number | string | undefined }
 
 export const useStyles = (props: Props) => StyleSheet.create({
   button: {
