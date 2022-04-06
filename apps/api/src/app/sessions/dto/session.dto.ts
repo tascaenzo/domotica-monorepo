@@ -1,5 +1,12 @@
 import { SessionInterface } from '@domotica/shared/interfaces';
-import { IsBoolean, IsDate, IsMongoId, IsOptional, IsString, IsUUID } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsMongoId,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class SessionDto implements SessionInterface {
   @IsMongoId()
@@ -34,4 +41,8 @@ export class SessionDto implements SessionInterface {
   @IsDate()
   @IsOptional()
   refreshedAt: Date;
+
+  constructor(partial: Partial<SessionDto>) {
+    Object.assign(this, partial);
+  }
 }

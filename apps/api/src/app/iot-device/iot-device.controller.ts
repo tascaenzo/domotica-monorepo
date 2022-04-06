@@ -1,5 +1,8 @@
 import { CONTROLLER_BASE_PATH } from '@domotica/shared/enums';
-import { IotDeviceInterface, JwtPyloadInterface } from '@domotica/shared/interfaces';
+import {
+  IotDeviceResponseInterface,
+  JwtPyloadInterface,
+} from '@domotica/shared/interfaces';
 import { Controller, Get, Sse, UseGuards } from '@nestjs/common';
 import { AuthUser } from '../auth/decorator/auth-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -11,7 +14,9 @@ export class IotDeviceController {
 
   @UseGuards(JwtAuthGuard)
   @Get('favorites')
-  async getFavorites(@AuthUser() auth: JwtPyloadInterface): Promise<IotDeviceInterface[]> {
+  async getFavorites(
+    @AuthUser() auth: JwtPyloadInterface
+  ): Promise<IotDeviceResponseInterface[]> {
     const devices = await this.iotDeviceService.getFavorites(auth.user.id);
 
     if (!devices) return [];
