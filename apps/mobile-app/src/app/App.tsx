@@ -3,8 +3,13 @@ import { useFonts } from 'expo-font';
 import Routes from './components/Routes';
 import { DeviceContext, UseDeviceListener } from './hooks/use-device-context';
 import SignIn from './screens/SignIn/SignIn';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { usePromiseTracker } from 'react-promise-tracker';
+import Loader from './components/Loader/Loader';
 
 export default () => {
+  const { promiseInProgress } = usePromiseTracker();
+
   const [loaded] = useFonts({
     OxygenRegular: require('../../assets/fonts/Oxygen-Regular.ttf'),
     OxygenLight: require('../../assets/fonts/Oxygen-Light.ttf'),
@@ -17,10 +22,16 @@ export default () => {
     return null;
   }
 
-  return <SignIn />;
+  return (
+    <>
+      <Loader isLoading={promiseInProgress} />
+      <SignIn />
+    </>
+  );
 
   return (
     <DeviceContext.Provider value={initialState}>
+      <Loader isLoading={promiseInProgress} />
       <Routes />
     </DeviceContext.Provider>
   );

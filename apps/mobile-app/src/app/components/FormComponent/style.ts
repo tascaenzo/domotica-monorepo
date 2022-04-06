@@ -20,5 +20,7 @@ export const styles = StyleSheet.create({
   input: {
     fontFamily: 'OxygenRegular',
     color: '#606060',
+    backgroundColor: 'transparent',
+    width: '100%'
   },
 });

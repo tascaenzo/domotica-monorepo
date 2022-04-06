@@ -8,20 +8,22 @@ import Button from '../../components/Button';
 import { useForm, Controller } from 'react-hook-form';
 import { signInAction } from '../../api/user.action';
 import { useFetch } from '../../hooks/use-fetch';
+import { AsyncStorage } from 'react-native';
+
 import {
   SignInRequestInterface,
   SignInResponseInterface,
 } from '@domotica/shared/interfaces';
 
 const SignIn = (): JSX.Element => {
-  const { fatchData, data } = useFetch<SignInResponseInterface>(signInAction);
+  const { fatchData } = useFetch<SignInResponseInterface>(signInAction);
   const { handleSubmit, control, formState } = useForm<SignInRequestInterface>({
     defaultValues: { email: '', password: '' },
   });
 
   const onSubmit = async (dataForm: SignInRequestInterface) => {
-    const t = await fatchData(dataForm);
-    console.log(t);
+    const signInResponse = await fatchData(dataForm);
+    
   };
 
   return (

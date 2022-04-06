@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { trackPromise } from 'react-promise-tracker';
 
 const baseUrl = 'http://192.168.1.71:3000/api';
 
@@ -14,15 +15,19 @@ export const useFetch = <T>({ method, endpoint, query }: FetchInterface) => {
 
   const fatchData = async (body?: unknown) => {
     try {
-      const response = await fetch(`${baseUrl}${endpoint}`, {
-        method,
-        credentials: 'same-origin',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      }).then((response) => response.json());
+      const response = trackPromise(
+        new Promise((done) => {
+          fetch(`${baseUrl}${endpoint}`, {
+            method,
+            credentials: 'same-origin',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }).then((response) => done(response.json()));
+        })
+      );
 
       setData(response as unknown as T);
 
@@ -35,5 +40,9 @@ export const useFetch = <T>({ method, endpoint, query }: FetchInterface) => {
     }
   };
 
-  return { fatchData, data, error };
+  return {
+    fatchData,
+    data,
+    error,
+  };
 };
