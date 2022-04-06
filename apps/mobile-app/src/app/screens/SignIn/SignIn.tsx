@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 import { useForm, Controller } from 'react-hook-form';
 import { signInAction } from '../../api/user.action';
 import { useFetch } from '../../hooks/use-fetch';
-import { AsyncStorage } from 'react-native';
+import { MMKV } from 'react-native-mmkv'
 
 import {
   SignInRequestInterface,
@@ -23,7 +23,8 @@ const SignIn = (): JSX.Element => {
 
   const onSubmit = async (dataForm: SignInRequestInterface) => {
     const signInResponse = await fatchData(dataForm);
-    
+    const storage = new MMKV();
+    storage.set('auth', JSON.stringify(signInResponse))
   };
 
   return (
