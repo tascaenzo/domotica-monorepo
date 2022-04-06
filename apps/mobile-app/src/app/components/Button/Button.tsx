@@ -6,7 +6,7 @@ interface Props {
   onPress?: () => void,
   title: string,
   color?: string,
-  width?: number,
+  width?: number | string,
 };
 
 const Button = ({ onPress, title, color, width }: Props) => {
