@@ -9,9 +9,15 @@ import { Logger } from '../logger';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private readonly logger: Logger) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private readonly logger: Logger
+  ) {}
 
-  async findByEmailAndPassword(email: string, password: string): Promise<User | null> {
+  async findByEmailAndPassword(
+    email: string,
+    password: string
+  ): Promise<User | null> {
     try {
       const user = await this.userModel.findOne({ email, deletedAt: null });
 
@@ -26,7 +32,11 @@ export class UsersService {
 
       return null;
     } catch (error) {
-      this.logger.error({ message: error, context: UsersService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: UsersService.name,
+        save: true,
+      });
 
       return null;
     }
@@ -41,7 +51,11 @@ export class UsersService {
 
       return user;
     } catch (error) {
-      this.logger.error({ message: error, context: UsersService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: UsersService.name,
+        save: true,
+      });
 
       return null;
     }
@@ -53,7 +67,11 @@ export class UsersService {
         createdAt: -1,
       });
     } catch (error) {
-      this.logger.error({ message: error, context: UsersService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: UsersService.name,
+        save: true,
+      });
 
       return null;
     }
@@ -61,13 +79,17 @@ export class UsersService {
 
   async findOne(id: string): Promise<User | null> {
     try {
-      const user = await this.userModel.findOne({ _id: id }, { password: 0 });
+      const user = await this.userModel.findOne({ _id: id });
 
-      if (!user) throw new NotFoundException(['Resource Not Found']);
+      if (!user) return null;
 
-      return user;
+      return user.toJSON();
     } catch (error) {
-      this.logger.error({ message: error, context: UsersService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: UsersService.name,
+        save: true,
+      });
 
       return null;
     }
@@ -79,7 +101,11 @@ export class UsersService {
         new: true,
       });
     } catch (error) {
-      this.logger.error({ message: error, context: UsersService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: UsersService.name,
+        save: true,
+      });
 
       return null;
     }
@@ -87,9 +113,16 @@ export class UsersService {
 
   async remove(id: string): Promise<User | null> {
     try {
-      return this.userModel.findOneAndUpdate({ _id: id }, { deletedAt: new Date() });
+      return this.userModel.findOneAndUpdate(
+        { _id: id },
+        { deletedAt: new Date() }
+      );
     } catch (error) {
-      this.logger.error({ message: error, context: UsersService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: UsersService.name,
+        save: true,
+      });
 
       return null;
     }

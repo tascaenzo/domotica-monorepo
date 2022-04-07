@@ -1,8 +1,10 @@
 import { USER_ROLE } from '@domotica/shared/enums';
 import { UserInterface } from '@domotica/shared/interfaces';
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsMongoId, IsString } from 'class-validator';
+import { Exclude } from 'class-transformer'
 
 export class UserDto implements UserInterface {
+  @IsMongoId()
   id: string;
 
   @IsString()
@@ -17,5 +19,14 @@ export class UserDto implements UserInterface {
   @IsString()
   lastName: string;
 
-  password: string | undefined;
+  @Exclude()
+  password?: string;
+
+  @Exclude()
+  _id: string;
+
+  constructor(partial: Partial<UserDto>) {
+    console.log(partial)
+    Object.assign(this, partial);
+  }
 }

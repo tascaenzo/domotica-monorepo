@@ -6,6 +6,8 @@ import { SignInResponseDto } from './dto/sign-in-response.dto';
 import { SignInDto } from './dto/sign-in-request.dto';
 import { Logger } from '../logger';
 import { Session } from '../sessions/sessions.schema';
+import { User } from '../users/users.schema';
+import { SignInResponseInterface } from '@domotica/shared/interfaces';
 
 @Injectable()
 export class AuthService {
@@ -13,12 +15,15 @@ export class AuthService {
     private readonly sessionsService: SessionsService,
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
-    private readonly logger: Logger,
+    private readonly logger: Logger
   ) {}
 
-  async signIn(signInDto: SignInDto): Promise<SignInResponseDto | null> {
+  async signIn(signInDto: SignInDto): Promise<SignInResponseInterface | null> {
     try {
-      const user = await this.userService.findByEmailAndPassword(signInDto.email, signInDto.password);
+      const user = await this.userService.findByEmailAndPassword(
+        signInDto.email,
+        signInDto.password
+      );
 
       if (!user) return null;
 
@@ -30,7 +35,11 @@ export class AuthService {
         user,
       };
     } catch (error) {
-      this.logger.error({ message: error, context: AuthService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: AuthService.name,
+        save: true,
+      });
 
       return null;
     }
@@ -46,7 +55,10 @@ export class AuthService {
 
       if (!user) return null;
 
-      const updateSession = await this.sessionsService.update(session.id, { ...session, refreshedAt: new Date() });
+      const updateSession = await this.sessionsService.update(session.id, {
+        ...session,
+        refreshedAt: new Date(),
+      });
 
       if (!updateSession) return null;
 
@@ -56,7 +68,11 @@ export class AuthService {
         user,
       };
     } catch (error) {
-      this.logger.error({ message: error, context: AuthService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: AuthService.name,
+        save: true,
+      });
 
       return null;
     }
@@ -66,9 +82,17 @@ export class AuthService {
     try {
       return this.sessionsService.remove(id);
     } catch (error) {
-      this.logger.error({ message: error, context: AuthService.name, save: true });
+      this.logger.error({
+        message: error,
+        context: AuthService.name,
+        save: true,
+      });
 
       return null;
     }
+  }
+
+  async getAuthUser(id: string): Promise<User | null> {
+    return this.userService.findOne(id);
   }
 }

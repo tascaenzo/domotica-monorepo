@@ -1,5 +1,5 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 
 import helmet from 'helmet';
@@ -35,7 +35,10 @@ async function bootstrap() {
     })
   );
   app.useGlobalPipes(new ValidationPipe());
-
+  app.useGlobalInterceptors(
+    new ClassSerializerInterceptor(app.get(Reflector))
+  );
+  
   await app.listen(port, '0.0.0.0');
   Logger.log(
     `� Application is running on: http://localhost:${port}/${globalPrefix}`
