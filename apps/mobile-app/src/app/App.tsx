@@ -28,7 +28,7 @@ export default () => {
 
         <AuthContext.Consumer>
           {(value) => {
-            if (!value?.user) return <SignIn />;
+            if (!value.user) return <SignIn />;
           }}
         </AuthContext.Consumer>
 

@@ -1,8 +1,7 @@
-import {
-  SignInResponseInterface,
-  UserInterface,
-} from '@domotica/shared/interfaces';
-import { IsJWT, IsObject, IsUUID } from 'class-validator';
+import { UserDto } from './../../users/dto/user.dto';
+import { SignInResponseInterface, UserInterface } from '@domotica/shared/interfaces';
+import { IsJWT, IsObject, IsUUID, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class SignInResponseDto implements SignInResponseInterface {
   @IsJWT()
@@ -12,6 +11,8 @@ export class SignInResponseDto implements SignInResponseInterface {
   refreshKey: string;
 
   @IsObject()
+  @ValidateNested()
+  @Type(() => UserDto)
   user: UserInterface;
 
   constructor(partial: Partial<SignInResponseDto>) {

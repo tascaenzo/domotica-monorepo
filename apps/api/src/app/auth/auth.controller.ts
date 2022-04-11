@@ -35,7 +35,7 @@ export class AuthController {
 
     if (!session) throw new UnauthorizedException('Wrong email or password');
 
-    return session;
+    return new SignInResponseDto(session);
   }
 
   @UseGuards(JwtAuthGuard)

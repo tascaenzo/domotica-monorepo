@@ -21,6 +21,7 @@ const Home = (): JSX.Element => {
           icon={<Ionicons name="home" size={32} color="#FFF" />}
           label="128 Device"
           title="Casa"
+          onPress={() => linkTo(`/${RoutesEnum.House}`)}
         />
         <Card
           style={styles.card}

@@ -26,7 +26,6 @@ export class UserDto implements UserInterface {
   _id: string;
 
   constructor(partial: Partial<UserDto>) {
-    console.log(partial)
     Object.assign(this, partial);
   }
 }

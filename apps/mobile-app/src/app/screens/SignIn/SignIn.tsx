@@ -38,8 +38,10 @@ const SignIn = (): JSX.Element => {
 
   const onSubmit = async (dataForm: SignInRequestInterface) => {
     const signInResponse = await signIn.fatchData(dataForm);
+
     if (signInResponse) {
       await AsyncStorage.setItem('auth', JSON.stringify(signInResponse));
+
       setUser(signInResponse.user);
     }
   };
